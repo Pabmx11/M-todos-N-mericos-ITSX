@@ -2,6 +2,12 @@
 
 Actividad Unidad 6 — Métodos Numéricos (SCC-1017), ITSX.
 
+**Integrantes:**
+
+- Pablo Ali Hinojosa de la Hidalga ([@Pabmx11](https://github.com/Pabmx11))
+- Jorge Angel Saldaña Morales ([@angelsaldanha](https://github.com/angelsaldanha))
+- Rey Arturo Acosta Varela ([@Papitaseca](https://github.com/Papitaseca))
+
 Resuelve dos problemas de valor inicial en el intervalo `[0, 0.3]` y compara cada paso contra la solución analítica exacta:
 
 | Clase | EDO | Condición inicial | Solución exacta |
