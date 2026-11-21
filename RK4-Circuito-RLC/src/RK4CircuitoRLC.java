@@ -5,13 +5,17 @@ public class RK4CircuitoRLC {
         double y1 = Y[0];
         double y2 = Y[1];
 
-        // Sistema equivalente de q'' + 0.4 q' + q = 0:
-        //   y1' = y2
-        //   y2' = -0.4 y2 - y1
-        double dy1 = y2;
-        double dy2 = -0.4 * y2 - y1;
+        // Vector de estado Y = [y1, y2] = [q, q']
+        double q = y1;        // q  = carga
+        double qPrima = y2;   // q' = corriente
 
-        return new double[]{dy1, dy2};
+        // Sistema equivalente de q'' + 0.4 q' + q = 0:
+        //   y1' = q'  = y2
+        //   y2' = q'' = -0.4 q' - q = -0.4 y2 - y1
+        double dy1 = qPrima;
+        double dy2 = -0.4 * qPrima - q;
+
+        return new double[]{dy1, dy2};   // regresa [q', q'']
     }
 
     // Suma vectorial escalada: res[i] = A[i] + factor * B[i]
@@ -44,9 +48,9 @@ public class RK4CircuitoRLC {
         double t = t0;
 
         System.out.println("RK4 vectorial - Circuito RLC con h = " + h + " (" + nPuntos + " puntos)");
-        System.out.println("n\t t_n\t y1 (Carga)\t y2 (Corr)\t q_exacta\t Error abs");
+        System.out.printf("%-4s %-6s %-16s %-16s %-12s %s\n", "n", "t_n", "q = y1 (Carga)", "q' = y2 (Corr)", "q_exacta", "Error abs");
         System.out.println("--------------------------------------------------------------------------");
-        System.out.printf("%d\t %.2f\t %.6f\t %.6f\t %.6f\t %.2e\n", 0, t, Y[0], Y[1], cargaExacta(t), Math.abs(cargaExacta(t) - Y[0]));
+        System.out.printf("%-4d %-6.2f %-16.6f %-16.6f %-12.6f %.2e\n", 0, t, Y[0], Y[1], cargaExacta(t), Math.abs(cargaExacta(t) - Y[0]));
 
         for (int i = 0; i < nPuntos; i++) {
             double[] k1 = evaluarSistema(t, Y);
@@ -63,7 +67,7 @@ public class RK4CircuitoRLC {
 
             t += h;
             double qExacta = cargaExacta(t);
-            System.out.printf("%d\t %.2f\t %.6f\t %.6f\t %.6f\t %.2e\n", i + 1, t, Y[0], Y[1], qExacta, Math.abs(qExacta - Y[0]));
+            System.out.printf("%-4d %-6.2f %-16.6f %-16.6f %-12.6f %.2e\n", i + 1, t, Y[0], Y[1], qExacta, Math.abs(qExacta - Y[0]));
         }
     }
 }

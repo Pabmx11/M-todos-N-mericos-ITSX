@@ -75,16 +75,16 @@ En IntelliJ IDEA: abrir la carpeta `RK4-Circuito-RLC` como proyecto, ejecutar `R
 
 ## Salida
 
-El programa calcula `nPuntos = 25` puntos después de `t = 0` e imprime `n`, `t_n`, la carga `y1`, la corriente `y2`,
+El programa calcula `nPuntos = 25` puntos después de `t = 0` e imprime `n`, `t_n`, la carga `q = y1`, la corriente `q' = y2`,
 la carga exacta y el error absoluto `|q_exacta(t_n) − y1(t_n)|`. Primeras y últimas líneas con `h = 0.2`:
 
 ```
-n    t_n    y1 (Carga)   y2 (Corr)    q_exacta     Error abs
-0    0.00   1.000000     0.000000     1.000000     0.00e+00
-1    0.20   0.980589    -0.190929     0.980587     2.01e-06
-2    0.40   0.925102    -0.359864     0.925097     4.46e-06
+n    t_n    q = y1 (Carga)   q' = y2 (Corr)   q_exacta     Error abs
+0    0.00   1.000000         0.000000         1.000000     0.00e+00
+1    0.20   0.980589         -0.190929        0.980587     2.01e-06
+2    0.40   0.925102         -0.359864        0.925097     4.46e-06
 ...
-25   5.00  -0.005562     0.368970    -0.005544     1.75e-05
+25   5.00   -0.005562        0.368970         -0.005544    1.75e-05
 ```
 
 Como el número de puntos es fijo, un `h` más chico cubre menos tiempo:
